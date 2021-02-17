@@ -20,10 +20,7 @@ public class TicTacToe
 		System.out.println("Current board is :");
 		showBoard(boardDesign());
 		
-		System.out.println("Please User input your move :: use numpad[1-9] ");
-		int playerMove = sc.nextInt();
-		
-		movePlayer(boardDesign(), playerMove, player);
+		movePlayer(boardDesign(), player);
 		
 	}
 	
@@ -31,7 +28,7 @@ public class TicTacToe
 	{     
 		char[] board = new char[10];
 		
-		for(int i=1; i<9; i++)
+		for (int i=1; i<10; i++)
 		{
 			board[i] = ' ';
 		}
@@ -42,7 +39,7 @@ public class TicTacToe
 	
 	public static char chooseLetter(char player)
 	{
-		if ( Character.toUpperCase(player) == 'X')
+		if (Character.toUpperCase(player) == 'X')
 		{
 			char computer = 'O';
 			return computer;
@@ -69,21 +66,62 @@ public class TicTacToe
 	     
 	}
 	
-	public static void movePlayer(char[] board, int playerMove, char player)
+	public static void movePlayer(char[] board, char player)
 	{
-		if( board[playerMove] == ' ')
+		while(emptyBoard(board))
+			{	
+				System.out.println("Please User input your move :: use numpad[1-9] ");
+				int playerMove = sc.nextInt();
+		
+				if (checkEmpty(board,playerMove))
+				{
+					player = Character.toUpperCase(player);
+					board[playerMove] = player;
+				}
+				else
+				{
+					System.out.println("Invalid Move : Play again : Please input only in free space");
+				}
+	
+				showBoard(board);
+			}
+	}
+	
+	public static boolean emptyBoard(char[] board)
+	{
+		boolean flag = true;
+		
+		for (int i=1; i<10; i++)
 		{
-			player = Character.toUpperCase(player);
-			board[playerMove] = player;
+			if( board[i] == ' ' )
+			{
+				flag = true;
+				break;
+			}
+			else
+			{
+				flag = false;
+			}
+			
+		}
+		return flag;
+	}
+	
+	public static boolean checkEmpty(char[] board, int playerMove)
+	{
+		boolean flag = true;
+		
+		if (board[playerMove] != ' ')
+		{
+			flag = false;
 		}
 		else
 		{
-			System.out.println("Please input a free space");
+			flag = true;
 		}
 		
-		showBoard(board);
+		return flag;
 	}
-	
 }
 	
 
