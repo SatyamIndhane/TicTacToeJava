@@ -18,24 +18,31 @@ public class TicTacToe
 		
 		System.out.println("Let's start the game");
 		System.out.println("Current board is :");
-		showBoard();
+		showBoard(boardDesign());
+		
+		System.out.println("Please User input your move :: use numpad[1-9] ");
+		int playerMove = sc.nextInt();
+		
+		movePlayer(boardDesign(), playerMove, player);
+		
 	}
 	
 	public static char[] boardDesign()
-	{
-		char[] board = new char[10];     
-
+	{     
+		char[] board = new char[10];
+		
 		for(int i=1; i<9; i++)
 		{
 			board[i] = ' ';
 		}
 		
 		return board;
+		
 	}
 	
 	public static char chooseLetter(char player)
 	{
-		if ( Character.toLowerCase(player) == 'x')
+		if ( Character.toUpperCase(player) == 'X')
 		{
 			char computer = 'O';
 			return computer;
@@ -48,10 +55,8 @@ public class TicTacToe
 		}
 	}
 	
-	public static void showBoard()
+	public static void showBoard(char[] board)
 	{
-		char[] board = boardDesign();
-		
 		
 		System.out.println("         |                    |           ");
 		System.out.println(board[7]+"        |          "+board[8]+"         |          "+board[9]);
@@ -62,6 +67,21 @@ public class TicTacToe
 	    	System.out.println("         |                    |           ");
 	    	System.out.println(board[1]+"        |          "+board[2]+"         |          "+board[3]);
 	     
+	}
+	
+	public static void movePlayer(char[] board, int playerMove, char player)
+	{
+		if( board[playerMove] == ' ')
+		{
+			player = Character.toUpperCase(player);
+			board[playerMove] = player;
+		}
+		else
+		{
+			System.out.println("Please input a free space");
+		}
+		
+		showBoard(board);
 	}
 	
 }
