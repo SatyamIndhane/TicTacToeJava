@@ -10,7 +10,7 @@ public class TicTacToe
 		
 		System.out.println("Welcome to Tic Tac Toe Java\r");
 		
-		System.out.println("Player choose X or O\r");
+		System.out.println("Human choose X or O\r");
 		char player = sc.next().charAt(0);
 		
 		char computer = chooseLetter(player);
@@ -19,6 +19,12 @@ public class TicTacToe
 		System.out.println("Let's start the game");
 		System.out.println("Current board is :");
 		showBoard(boardDesign());
+		
+		System.out.println("Tossing Coin to check who plays first");
+		System.out.println("Choose Heads or Tails :: Human");
+		
+		char toss = sc.next().charAt(0);
+		whoPlaysFirst(toss);
 		
 		movePlayer(boardDesign(), player);
 		
@@ -104,12 +110,13 @@ public class TicTacToe
 			}
 			
 		}
+		
 		return flag;
 	}
 	
 	public static boolean checkEmpty(char[] board, int playerMove)
 	{
-		boolean flag = true;
+		boolean flag;
 		
 		if (board[playerMove] != ' ')
 		{
@@ -121,6 +128,31 @@ public class TicTacToe
 		}
 		
 		return flag;
+	}
+	
+	public static void whoPlaysFirst(char toss)
+	{
+		int val = (int)((Math.random()*10)%2);
+		toss = Character.toUpperCase(toss);
+		char winningToss;
+		
+		if (val == 0)
+		{
+			winningToss = 'H';
+		}
+		else
+		{
+			winningToss = 'T';
+		}
+		
+		if ( winningToss == toss)
+		{
+			System.out.println("Human goes first");
+		}
+		else
+		{
+			System.out.println("Computer goes first");
+		}
 	}
 }
 	
