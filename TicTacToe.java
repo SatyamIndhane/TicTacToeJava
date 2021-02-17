@@ -18,7 +18,6 @@ public class TicTacToe
 		
 		System.out.println("Let's start the game");
 		System.out.println("Current board is :");
-		
 		showBoard();
 	}
 	
